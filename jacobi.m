@@ -1,4 +1,4 @@
-function [V,D,errors] = jacobi(A, tol)
+function [V,D] = jacobi(A, tol)
 
 % function [V,D] = jacobi(A, tol)
 %
@@ -15,9 +15,7 @@ if n<2
   return
 end
 
-MAXIT = 10;
-errors = [];
-eigs = sort(eig(A));
+MAXIT = 100;
 
 V = eye(n);
 for it = 1:MAXIT
@@ -32,14 +30,8 @@ for it = 1:MAXIT
             V = V*J;
         end
     end
-%     disp(['Iteratiestap ' num2str(it)]);
-%     disp(['Grootste diagonaalelement:      ' num2str(max(diag(A)))]);
-%     disp(['Grootste niet-diagonaalelement: ' num2str(max(max(A-diag(diag(A)))))]);
-%     disp(['Norm A met diagonaal 0:         ' num2str(norm(A-diag(diag(A))))]);
-%     disp(' ');
-    errors = [errors norm( sort(diag(A)) - eigs )];
     if norm(A-diag(diag(A))) / max(diag(A)) < tol
-        %break
+        break
     end
 end
 D = A;
