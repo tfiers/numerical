@@ -8,4 +8,3 @@ A = triu(rand(n));
 A = A + triu(A,1)';
 
 end
-
