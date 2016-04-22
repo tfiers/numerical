@@ -2,8 +2,8 @@ function [V,D] = jacobi(A, tol)
 
 % function [V,D] = jacobi(A, tol)
 %
-% Computes the eigenvalue factorisation V*D*V^T of a symmetric matrix A,
-% up to a given tolerance level.
+% Computes the eigenvalue factorisation V*D*V' of a symmetric matrix A,
+% up to a given tolerance level, using the Jacobi method.
 
 [n,m] = size(A);
 if n~=m,
@@ -31,6 +31,7 @@ for it = 1:MAXIT
         end
     end
     if norm(A-diag(diag(A))) / max(diag(A)) < tol
+        disp(it);
         break
     end
 end
